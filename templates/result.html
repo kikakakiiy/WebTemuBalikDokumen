@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Search Box -->
+        <div class="search-box">
+            <form action="/search" method="GET">
+                <input type="text" name="query" value="{{ query }}" placeholder="Enter your search query">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        
+
+        <!-- Search Info -->
+        <div class="results-info">
+            {{ documents|length }} results found in {{ search_time }} seconds
+        </div>
+
+        <ul class="results-list">
+            {% if documents %}
+                {% for document, snippet, file_format, similarity in documents %}
+                <li class="result-item">
+                    <div class="result-details">
+                        <h3 
+                            data-document="{{ document }}" 
+                            class="clickable-title">
+                            {{ document }}
+                        </h3>
+                        <p>{{ snippet }}</p>
+                        <div class="result-info">
+                            Format: {{ file_format }} | Similarity: {{ similarity|round(3) }}
+                        </div>
+                    </div>
+                    <button 
+                        data-document="{{ document }}" 
+                        class="open-button">
+                        Open
+                    </button>
+                </li>
+                {% endfor %}
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </ul>
+        
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const titles = document.querySelectorAll(".clickable-title");
+            const buttons = document.querySelectorAll(".open-button");
+    
+            // Fungsi untuk navigasi ke halaman baru
+            const navigateToDocument = (documentName) => {
+                // Contoh URL dinamis (sesuaikan endpoint jika perlu)
+                const url = `/document/${encodeURIComponent(documentName)}`;
+                window.location.href = url;
+            };
+    
+            // Event Listener untuk judul dokumen
+            titles.forEach(title => {
+                title.addEventListener("click", () => {
+                    const documentName = title.getAttribute("data-document");
+                    navigateToDocument(documentName);
+                });
+            });
+    
+            // Event Listener untuk tombol Open
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const documentName = button.getAttribute("data-document");
+                    navigateToDocument(documentName);
+                });
+            });
+        });
+    </script>
+   
+    
+    
+</body>
+</html>

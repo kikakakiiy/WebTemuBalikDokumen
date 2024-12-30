@@ -1,0 +1,198 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f3e5f5;
+    margin: 0;
+    padding: 0;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: #ba68c8;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Document Details */
+.document-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #ede7f6;
+    border-radius: 8px;
+}
+
+.document-details p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.document-details .btn {
+    padding: 10px 20px;
+    background: #8e24aa;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.document-details .btn:hover {
+    background: #ab47bc;
+    transform: translateY(-2px);
+}
+
+/* Buttons for actions */
+button {
+    padding: 10px 20px;
+    background: #6a1b9a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #7b1fa2;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Section Headers */
+main h3 {
+    font-size: 1.6rem;
+    color: #6a1b9a;
+    border-left: 4px solid #8e24aa;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+/* Text Areas */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d1c4e9;
+    border-radius: 8px;
+    resize: none;
+    background: #f8f9fa;
+    color: #333;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background: #ede7f6;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6a1b9a;
+}
+
+/* Add spacing around sections */
+main {
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .document-details {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .document-details .btn {
+        margin: 10px 0;
+    }
+}
+
+#kata-dasar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#kata-dasar-table th, #kata-dasar-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Header dengan latar belakang warna ungu */
+#kata-dasar-table th {
+    background-color: #8e24aa;
+    color: white;
+    font-weight: bold;
+}
+
+/* Zebra Striping: Baris ganjil memiliki latar belakang warna yang lebih terang */
+#kata-dasar-table tr:nth-child(odd) {
+    background-color: #f3e5f5;
+}
+
+/* Warna latar belakang untuk baris genap */
+#kata-dasar-table tr:nth-child(even) {
+    background-color: #ede7f6;
+}
+
+/* Efek hover pada baris tabel */
+#kata-dasar-table tr:hover {
+    background-color: #ab47bc;
+    color: white;
+    cursor: pointer;
+}
+
+/* Menambahkan efek bayangan pada seluruh tabel untuk memberikan kedalaman */
+#kata-dasar-table {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Penambahan border radius untuk sudut tabel */
+#kata-dasar-table th, #kata-dasar-table td {
+    border-radius: 8px;
+}
+
+
+.action-buttons {
+    display: flex;
+    justify-content: center; /* Memusatkan tombol secara horizontal */
+    gap: 10px; /* Memberikan jarak antar tombol */
+    margin-top: 20px; /* Menambahkan jarak di atas tombol */
+}

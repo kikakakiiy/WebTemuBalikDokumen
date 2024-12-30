@@ -1,0 +1,127 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Container */
+.container {
+    width: 100%; /* Memastikan container lebar penuh */
+    max-width: 1200px; /* Max-width untuk mencegah terlalu lebar */
+    margin: 20px auto;
+    padding: 0 15px; /* Menambahkan padding kiri dan kanan */
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Pastikan menggunakan lebar penuh */
+}
+
+/* Input Box */
+.search-box input {
+    flex-grow: 1; /* Membuat input mengisi seluruh lebar yang tersedia */
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+/* Tombol Pencarian */
+.search-box button {
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #561f5d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: auto;
+}
+
+.search-box button:hover {
+    background-color: #ff5246;
+}
+
+/* Search Info */
+.results-info {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Results List */
+.results-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.result-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-details {
+    max-width: 75%;
+}
+
+.result-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #1a0dab;
+}
+
+.result-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #4d5156;
+}
+
+/* Style untuk tombol saat diklik */
+.result-item button.clicked {
+    background-color: #28a745; /* Hijau untuk tombol yang diklik */
+    color: white;
+}
+
+/* Style untuk judul saat kursor berada di atas (hover) */
+.result-details h3:hover {
+    color: #ff6347; /* Oranye saat kursor di atas */
+    text-decoration: underline; /* Tambahkan garis bawah untuk efek hover */
+}
+
+/* Style untuk judul yang tetap berubah warna setelah diklik */
+.result-details h3.clicked {
+    color: #28a745; /* Hijau setelah diklik */
+    text-decoration: none; /* Hilangkan garis bawah */
+}
+
+.result-info {
+    font-size: 12px;
+    color: #70757a;
+}
+
+/* Open Button */
+.result-item button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.result-item button:hover {
+    background-color: #0056b3;
+}

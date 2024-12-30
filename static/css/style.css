@@ -1,0 +1,58 @@
+
+.search-container {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;  
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.animation {
+    width: 500px;  /* Memperbesar gambar animasi */
+    height: auto;
+    margin: 0 auto 30px;
+}
+
+/* input pencarian */
+input[type="text"] {
+    width: 80%;  
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 25px;  
+    box-sizing: border-box;  
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #8A2BE2;  
+}
+
+/* tombol pencarian */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    background-color: #8A2BE2;
+    color: white;
+    border-radius: 30px;  
+    cursor: pointer;
+    width: 80%;  
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #7A1B94;  
+}
+
+button:active {
+    background-color: #FF6347;  
+}
+

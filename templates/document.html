@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Dokumen</title>
+    <link rel="stylesheet" href="/static/css/document.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color:rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        header {
+            background: #ba68c8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        textarea {
+            width: calc(100% - 40px);
+            height: 150px;
+            padding: 10px;
+            margin: 10px 20px;
+            font-size: 1rem;
+            border: 1px solid #d1c4e9;
+            border-radius: 8px;
+            resize: none;
+            background: #f8f9fa;
+            color: #333;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #8e24aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ab47bc;
+        }
+
+        /* Document Details */
+        .document-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #ede7f6;
+            border-radius: 8px;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Detail Dokumen</h1>
+        </header>
+        <main>
+
+            <div class="document-details">
+                <div>
+                    <p><strong>Judul Dokumen:</strong> {{ filename }}</p>
+                </div>
+                <div>
+                    <a href="/download/{{ filename }}" class="btn">Download Dokumen</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Isi Dokumen:</h3>
+                <textarea id="document-content" readonly>{{ original_text }}</textarea>
+            </div>
+
+            
+
+            <div class="action-buttons">
+                <button id="tokenizing-btn" class="btn">Tokenizing</button>
+                <button id="filtration-btn" class="btn">Filtration</button>
+                <button id="stemming-btn" class="btn">Stemming</button>
+                <button id="kata-dasar-btn" class="btn">Kata Dasar</button>
+                
+            </div>
+
+            <div id="tokenizing-section" class="result-section">
+                <h3>Hasil Tokenizing:</h3>
+                <textarea id="tokenized-text" readonly>{{ tokenized_text }}</textarea>
+            </div>
+
+            <div id="filtration-section" class="result-section">
+                <h3>Hasil Filtration:</h3>
+                <textarea id="filtered-text" readonly>{{ filtered_text }}</textarea>
+            </div>
+
+            <div id="stemming-section" class="result-section">
+                <h3>Hasil Stemming:</h3>
+                <textarea id="stemmed-text" readonly>{{ stemmed_text }}</textarea>
+            </div>
+
+            <div id="kata-dasar-section" class="result-section">
+                <h3>Hasil Kata Dasar:</h3>
+                <table id="kata-dasar-table">
+                    <thead>
+                        <tr>
+                            <th>Kata Dasar</th>
+                            <th>Frekuensi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data kata dasar akan dimasukkan di sini -->
+                    </tbody>
+                </table>
+                <p id="jumlah-kata-dasar">Jumlah Kata Dasar: 0</p>
+            </div>
+            
+
+            
+        </main>
+    </div>
+
+    <script>
+
+        function processText(action) {
+
+            setTimeout(() => {
+                const sectionId = `${action}-section`;
+                const textareaId = `${action}-text`;
+
+                document.getElementById(sectionId).style.display = 'block'; // Tampilkan hasil
+                const originalText = document.getElementById('document-content').value;
+                let processedText = '';
+
+                document.getElementById(textareaId).value = processedText;
+
+                // Tentukan proses berdasarkan action
+                switch (action) {
+                    case 'tokenizing':
+                        document.getElementById('tokenizing-section').style.display = 'block';
+                        document.getElementById('tokenized-text').value = processedText;
+                        break;
+
+                    case 'filtration':
+                        document.getElementById('filtration-section').style.display = 'block';
+                        document.getElementById('filtered-text').value = processedText;
+                        break;
+
+                    case 'stemming':
+                        document.getElementById('stemming-section').style.display = 'block';
+                        document.getElementById('stemmed-text').value = processedText;
+                        break;
+                }
+                hideLoading();
+            }, 1000);
+        }
+
+        document.getElementById('tokenizing-btn').addEventListener('click', () => {
+            processText('tokenizing');
+        });
+
+        document.getElementById('filtration-btn').addEventListener('click', () => {
+            processText('filtration');
+        });
+
+        document.getElementById('stemming-btn').addEventListener('click', () => {
+            processText('stemming');
+        });
+
+        document.getElementById('kata-dasar-btn').addEventListener('click', function() {
+            const formData = new FormData();
+            const filename = "{{ filename }}"; // Nama file dokumen
+            formData.append('filename', filename);
+        
+            fetch('/kata-dasar', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.kata_dasar) {
+                    const kataDasarSection = document.getElementById('kata-dasar-section');
+                    kataDasarSection.style.display = 'block';
+        
+                    const kataDasarTableBody = document.querySelector('#kata-dasar-table tbody');
+                    kataDasarTableBody.innerHTML = ''; // Kosongkan tabel sebelumnya
+        
+                    // Menambahkan data kata dasar ke dalam tabel
+                    for (const [kata, frekuensi] of Object.entries(data.kata_dasar)) {
+                        const row = document.createElement('tr');
+                        const kataCell = document.createElement('td');
+                        const frekuensiCell = document.createElement('td');
+                        
+                        kataCell.textContent = kata;
+                        frekuensiCell.textContent = frekuensi;
+                        
+                        row.appendChild(kataCell);
+                        row.appendChild(frekuensiCell);
+                        kataDasarTableBody.appendChild(row);
+                    }
+        
+                    // Menampilkan jumlah kata dasar
+                    const jumlahKataDasar = document.getElementById('jumlah-kata-dasar');
+                    jumlahKataDasar.textContent = `Jumlah Kata Dasar: ${Object.keys(data.kata_dasar).length}`;
+                } else {
+                    console.error('Data kata dasar tidak ditemukan');
+                }
+            })
+            .catch(error => {
+                console.error('Terjadi error:', error);
+            });
+        });        
+             
+    </script>
+</body>
+</html>
